@@ -1,0 +1,15 @@
+:root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
+body,html,#root { margin: 0; height: 100%; }
+.shell { display:flex; flex-direction:column; height:100%; }
+header { display:flex; justify-content:space-between; align-items:center; padding: 0.7rem 1rem; background:#0d1117; border-bottom:1px solid #222; }
+.controls button { margin-left:0.5rem; }
+button.active { background:#2563eb; color:#fff; }
+.banner { padding:0.5rem 1rem; background:#7c2d12; }
+main { display:grid; grid-template-columns: 270px 1fr 300px; gap:0.5rem; flex:1; min-height:0; }
+aside,.drawer { padding:0.7rem; background:#0d1117; overflow:auto; }
+input { width:100%; margin-bottom:0.5rem; padding:0.4rem; }
+.result { width:100%; margin-bottom:0.3rem; text-align:left; }
+.atlas-canvas { min-height:0; background:#05080f; }
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; grid-template-rows: 180px 1fr 220px; }
+}
