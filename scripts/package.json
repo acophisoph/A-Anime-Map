@@ -1,0 +1,20 @@
+{
+  "name": "anime-atlas-scripts",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ingest:batched": "tsx src/ingest/batched.ts",
+    "build:artifacts": "tsx src/artifacts/build.ts",
+    "sanity:artifacts": "tsx src/artifacts/sanity.ts",
+    "sync:data": "tsx src/artifacts/sync-data.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.1.2",
+    "tsx": "^4.17.1",
+    "umap-js": "^1.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

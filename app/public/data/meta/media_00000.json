@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "type": "ANIME",
+    "season_year": 2011,
+    "title_romaji": "Steins;Gate",
+    "title_english": "Steins;Gate",
+    "title_native": "シュタインズ・ゲート",
+    "genres_json": "[\"Sci-Fi\",\"Thriller\"]",
+    "tags_json": "[{\"name\":\"Time Travel\",\"rank\":90}]",
+    "studios_json": "[{\"id\":1,\"name\":\"White Fox\"}]"
+  },
+  {
+    "id": 2,
+    "type": "ANIME",
+    "season_year": 2009,
+    "title_romaji": "Fullmetal Alchemist: Brotherhood",
+    "title_english": "Fullmetal Alchemist: Brotherhood",
+    "title_native": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+    "genres_json": "[\"Action\",\"Adventure\"]",
+    "tags_json": "[{\"name\":\"Military\",\"rank\":80}]",
+    "studios_json": "[{\"id\":2,\"name\":\"Bones\"}]"
+  }
+]
