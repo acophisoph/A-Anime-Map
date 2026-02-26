@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { UMAP } from 'umap-js';
 import { runMigrations } from '../db/migrate';
+import { repoPath } from '../util/paths';
 
 const db = runMigrations();
-const dataDir = path.resolve('data');
+const dataDir = repoPath('data');
 fs.mkdirSync(path.join(dataDir, 'meta'), { recursive: true });
 fs.mkdirSync(path.join(dataDir, 'index'), { recursive: true });
 fs.mkdirSync(path.join(dataDir, 'lookup'), { recursive: true });

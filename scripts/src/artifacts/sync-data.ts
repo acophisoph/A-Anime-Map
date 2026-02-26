@@ -1,8 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
 
-const src = path.resolve('data');
-const dst = path.resolve('app/public/data');
+import { repoPath } from '../util/paths';
+
+const src = repoPath('data');
+const dst = repoPath('app','public','data');
 fs.rmSync(dst, { recursive: true, force: true });
 fs.mkdirSync(dst, { recursive: true });
 fs.cpSync(src, dst, { recursive: true });
