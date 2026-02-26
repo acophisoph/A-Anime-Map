@@ -19,7 +19,7 @@ jobs:
           path: scripts/.cache/anime-atlas.sqlite
           key: anime-atlas-sqlite-${{ runner.os }}-${{ github.ref }}
           restore-keys: anime-atlas-sqlite-${{ runner.os }}-
-      - run: npm ci
+      - run: npm install
       - run: npm run ingest:batched
         env:
           TIME_BUDGET_MINUTES: 270

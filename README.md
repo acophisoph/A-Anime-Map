@@ -5,7 +5,7 @@ Production-ready monorepo for a static GitHub Pages anime/media + people atlas w
 ## Quick start
 
 ```bash
-npm ci
+npm install
 npm run ingest:batched
 npm run build:artifacts
 npm run sanity:artifacts
