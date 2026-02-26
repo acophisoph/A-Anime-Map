@@ -1,0 +1,36 @@
+{
+  "entries": [
+    {
+      "id": 1,
+      "kind": "media",
+      "label_en": "Steins;Gate",
+      "label_native": "シュタインズ・ゲート",
+      "year": 2011,
+      "tags": [
+        "Sci-Fi"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "media",
+      "label_en": "Fullmetal Alchemist: Brotherhood",
+      "label_native": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "year": 2009,
+      "tags": [
+        "Action"
+      ]
+    },
+    {
+      "id": 101,
+      "kind": "person",
+      "label_en": "Mamoru Miyano",
+      "label_native": "宮野 真守"
+    },
+    {
+      "id": 102,
+      "kind": "person",
+      "label_en": "Yasuhiro Irie",
+      "label_native": "入江 泰浩"
+    }
+  ]
+}
