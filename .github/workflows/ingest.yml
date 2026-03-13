@@ -3,13 +3,15 @@ on:
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 concurrency:
   group: ingest
   cancel-in-progress: false
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,8 +25,8 @@ jobs:
       - run: npm install
       - run: npm run ingest:batched
         env:
-          TIME_BUDGET_MINUTES: 240
-          RUN_BATCH_LIMIT: 32
+          TIME_BUDGET_MINUTES: 210
+          RUN_BATCH_LIMIT: 24
       - run: npm run build:artifacts
       - run: npm run sanity:artifacts
       - run: |
