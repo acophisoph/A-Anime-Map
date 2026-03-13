@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "edges": [
+    {
+      "source": 101,
+      "target": 102,
+      "weight": 0.4
+    }
+  ]
+}
