@@ -1,0 +1,37 @@
+name: ingest
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 270
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/cache@v4
+        with:
+          path: scripts/.cache/anime-atlas.sqlite
+          key: anime-atlas-sqlite-${{ runner.os }}-${{ github.ref }}
+          restore-keys: anime-atlas-sqlite-${{ runner.os }}-
+      - run: npm install
+      - run: npm run ingest:batched
+        env:
+          TIME_BUDGET_MINUTES: 180
+          RUN_BATCH_LIMIT: 16
+      - run: npm run build:artifacts
+      - run: npm run sanity:artifacts
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "chore(data): refresh ingest artifacts" || exit 0
+          git push
