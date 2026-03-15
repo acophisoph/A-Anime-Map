@@ -11,7 +11,7 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 270
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,8 +25,8 @@ jobs:
       - run: npm install
       - run: npm run ingest:batched
         env:
-          TIME_BUDGET_MINUTES: 210
-          RUN_BATCH_LIMIT: 24
+          TIME_BUDGET_MINUTES: 180
+          RUN_BATCH_LIMIT: 16
       - run: npm run build:artifacts
       - run: npm run sanity:artifacts
       - run: |
