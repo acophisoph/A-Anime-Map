@@ -1,0 +1,10 @@
+{
+  "total_media_in_db": 2,
+  "total_people_in_db": 2,
+  "completed_batches_count": 6,
+  "pending_batches_count": 194,
+  "last_ingest_run_timestamp": 1772008238218,
+  "has_staff_for_all_media": false,
+  "has_characters_for_all_media": false,
+  "artifact_encoding": "json"
+}
