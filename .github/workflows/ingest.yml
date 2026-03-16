@@ -11,13 +11,15 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 270
+    timeout-minutes: 210
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
-      - uses: actions/cache@v4
+          node-version: 22
+      - uses: actions/cache@v5
         with:
           path: scripts/.cache/anime-atlas.sqlite
           key: anime-atlas-sqlite-${{ runner.os }}-${{ github.ref }}
@@ -25,8 +27,8 @@ jobs:
       - run: npm install
       - run: npm run ingest:batched
         env:
-          TIME_BUDGET_MINUTES: 180
-          RUN_BATCH_LIMIT: 16
+          TIME_BUDGET_MINUTES: 120
+          RUN_BATCH_LIMIT: 8
       - run: npm run build:artifacts
       - run: npm run sanity:artifacts
       - run: |
