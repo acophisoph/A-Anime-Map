@@ -10,14 +10,37 @@ export function App() {
   const [search, setSearch] = useState<SearchEntry[]>([]);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<SearchEntry | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const dataBase = `${import.meta.env.BASE_URL}data`;
 
   useEffect(() => {
-    void fetch('./data/manifest.json').then((r) => r.json()).then(setManifest);
-    void fetch('./data/points.json')
-      .then((r) => r.json())
-      .then((payload) => setPoints(payload.points ?? []));
-    void fetch('./data/index/search.json').then((r) => r.json()).then((d) => setSearch(d.entries ?? []));
-  }, []);
+    const load = async () => {
+      try {
+        const [manifestRes, pointsRes, searchRes] = await Promise.all([
+          fetch(`${dataBase}/manifest.json`),
+          fetch(`${dataBase}/points.json`),
+          fetch(`${dataBase}/index/search.json`),
+        ]);
+
+        if (!manifestRes.ok || !pointsRes.ok || !searchRes.ok) {
+          throw new Error(`Artifact fetch failed (${manifestRes.status}/${pointsRes.status}/${searchRes.status})`);
+        }
+
+        const manifestPayload = await manifestRes.json();
+        const pointsPayload = await pointsRes.json();
+        const searchPayload = await searchRes.json();
+
+        setManifest(manifestPayload);
+        setPoints(pointsPayload.points ?? []);
+        setSearch(searchPayload.entries ?? []);
+      } catch (error: any) {
+        setLoadError(String(error?.message ?? error));
+      }
+    };
+
+    void load();
+  }, [dataBase]);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
@@ -37,6 +60,7 @@ export function App() {
           <button onClick={() => setLang((p) => (p === 'en' ? 'native' : 'en'))}>{lang === 'en' ? 'EN' : 'JP'}</button>
         </div>
       </header>
+      {loadError && <div className="banner">Failed to load local artifacts: {loadError}</div>}
       {manifest && (!manifest.has_staff_for_all_media || !manifest.has_characters_for_all_media) && (
         <div className="banner">Data still ingesting: atlas is partial but usable.</div>
       )}
