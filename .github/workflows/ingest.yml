@@ -11,7 +11,7 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 210
+    timeout-minutes: 180
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
@@ -27,8 +27,8 @@ jobs:
       - run: npm install
       - run: npm run ingest:batched
         env:
-          TIME_BUDGET_MINUTES: 120
-          RUN_BATCH_LIMIT: 8
+          TIME_BUDGET_MINUTES: 90
+          RUN_BATCH_LIMIT: 6
       - run: npm run build:artifacts
       - run: npm run sanity:artifacts
       - run: |
