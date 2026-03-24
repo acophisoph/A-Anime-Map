@@ -1,0 +1,33 @@
+name: deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: timeout 20m npm install
+      - run: timeout 10m npm run sanity:artifacts
+      - run: timeout 5m npm run sync:data
+      - run: timeout 10m npm run build:site
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+      - run: test -f app/dist/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+      - uses: actions/deploy-pages@v4
